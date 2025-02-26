@@ -1,0 +1,7 @@
+/build
+/dist
+/output
+/venv
+/__pycache__
+
+main.spec
