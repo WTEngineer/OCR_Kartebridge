@@ -52,3 +52,9 @@ def remove_non_japanese(text_blocks):
 
     return japanese_text_blocks
 
+def categorize_by_box_size(text_blocks):
+    # Initialize variables to store the main text
+    title = ""
+    author = ""
+    publisher = ""
+    other = ""
