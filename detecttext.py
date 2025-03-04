@@ -58,3 +58,12 @@ def categorize_by_box_size(text_blocks):
     author = ""
     publisher = ""
     other = ""
+    # Calculate the average bounding box size
+    avg_box_size = np.mean([((bbox[2][0] - bbox[0][0]) * (bbox[2][1] - bbox[0][1])) for (bbox, _, _) in text_blocks])
+
+    # Now check each bounding box's area and categorize based on size
+    for (bbox, text, prob) in text_blocks:
+        # Calculate the area of the current bounding box
+        width = bbox[2][0] - bbox[0][0]
+        height = bbox[2][1] - bbox[0][1]
+        area = width * height
