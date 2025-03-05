@@ -42,5 +42,9 @@ def process_video():
         # Exit on pressing the 'q' key
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
+    # Release the video capture object and close display windows
+    cap.release()
+    cv2.destroyAllWindows()
+
 # Call the function
 process_video()
