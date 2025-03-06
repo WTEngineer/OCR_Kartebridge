@@ -28,23 +28,5 @@ def process_video():
             cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
             continue
         
-        if cv2.waitKey(1) & 0xFF == ord('c'):
-            result = detecttext.detect_text(frame)  # Detect text in the frame
-            image = frame.copy()
-            title, author, publisher, other, combined_text = detecttext.show_textregion(image, result)  # Show the text region in the frame
-            # title = util.get_longest_word(searchtext)
-            # Combine title, author, and publisher (and any other info)
-            search_query = f"{title}"
-            chromesearch.google_search(search_query)  # Search the text in Google
-        # Display the frame in a window
-        cv2.imshow("Video Frame", frame)
-
-        # Exit on pressing the 'q' key
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-    # Release the video capture object and close display windows
-    cap.release()
-    cv2.destroyAllWindows()
-
 # Call the function
 process_video()
