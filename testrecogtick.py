@@ -28,6 +28,13 @@ def find_most_changed_grid_section(image1_path, image2_path, width_num_parts, he
     # Determine width and height of each section
     part_width = width // width_num_parts
     part_height = height // height_num_parts
+    # Compute differences for each section
+    differences = np.zeros((height_num_parts, width_num_parts))  # Grid to store differences
+    for i in range(height_num_parts):
+        for j in range(width_num_parts):
+            # Extract corresponding parts
+            part1 = image1[i * part_height: (i + 1) * part_height, j * part_width: (j + 1) * part_width]
+            part2 = image2[i * part_height: (i + 1) * part_height, j * part_width: (j + 1) * part_width]
 
 
 # # Example usage
