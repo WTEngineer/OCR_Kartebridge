@@ -16,6 +16,15 @@ def find_most_changed_grid_section(image1_path, image2_path, width_num_parts, he
     image2 = cv2.imread(image2_path, cv2.IMREAD_GRAYSCALE)
 
     # Verify if images are loaded properly
+    if image1 is None or image2 is None:
+        raise ValueError("One or both images could not be loaded. Please check the file paths.")
+
+    # Ensure images have the same dimensions
+    if image1.shape != image2.shape:
+        raise ValueError("Images must have the same dimensions for comparison.")
+
+    # Get image dimensions
+    height, width = image1.shape
 
 
 # # Example usage
