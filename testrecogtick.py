@@ -25,17 +25,31 @@ def find_most_changed_grid_section(image1_path, image2_path, width_num_parts, he
 
     # Get image dimensions
     height, width = image1.shape
+
     # Determine width and height of each section
     part_width = width // width_num_parts
     part_height = height // height_num_parts
+
     # Compute differences for each section
     differences = np.zeros((height_num_parts, width_num_parts))  # Grid to store differences
+
     for i in range(height_num_parts):
         for j in range(width_num_parts):
             # Extract corresponding parts
             part1 = image1[i * part_height: (i + 1) * part_height, j * part_width: (j + 1) * part_width]
             part2 = image2[i * part_height: (i + 1) * part_height, j * part_width: (j + 1) * part_width]
 
+            # Compute absolute difference
+            diff = cv2.absdiff(part1, part2)
+
+            # Sum of differences as a measure of change
+            differences[i, j] = np.sum(diff)
+
+    # Identify the section with the most changes (returns row, col index)
+    most_changed_row, most_changed_col = np.unravel_index(np.argmax(differences), differences.shape)
+
+    # Convert to 1-based index
+    return most_changed_row, most_changed_col
 
 # # Example usage
 # image1_path = "./output/clip/cropped_box_11.png"
