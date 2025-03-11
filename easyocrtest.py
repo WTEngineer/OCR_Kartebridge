@@ -26,3 +26,5 @@ for image_path in image_paths:
         print(f"Error: Unable to load image {image_path}")
         continue  # Skip this image if it couldn't be loaded
 
+    # Perform OCR using EasyOCR
+    result = reader.readtext(image_path)  # Detect text in the image
