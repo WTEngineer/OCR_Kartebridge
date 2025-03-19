@@ -27,8 +27,8 @@ def process_video():
             print("End of video or error reading the frame.")
             cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
             continue
-        
-        if cv2.waitKey(1) & 0xFF == ord('c'):
+			
+		if cv2.waitKey(1) & 0xFF == ord('c'):
             result = detecttext.detect_text(frame)  # Detect text in the frame
             image = frame.copy()
             title, author, publisher, other, combined_text = detecttext.show_textregion(image, result)  # Show the text region in the frame
