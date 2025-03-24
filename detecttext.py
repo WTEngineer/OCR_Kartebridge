@@ -67,3 +67,24 @@ def categorize_by_box_size(text_blocks):
         width = bbox[2][0] - bbox[0][0]
         height = bbox[2][1] - bbox[0][1]
         area = width * height
+        # Categorize based on box area size relative to the average box size
+        if area > avg_box_size * 1.2:  # 1.5x the average area as a threshold for "larger" boxes
+            # Assuming larger boxes are the title
+            # if len(title) < len(text):  # Prefer the longest text as the title
+            title += (text + " ")
+        elif "??" in text or "??" in text:
+            # If the text contains "author" keywords, it's likely the author
+            author += (text + " ")
+        elif "???" in text or "??" in text:
+            # If the text contains "publisher" keywords, it's likely the publisher
+            publisher += (text + " ")
+        else:
+            # If the text doesn't fit into the categories above, consider it as potential author or other info
+            if len(author) == 0:
+                author += (text + " ")
+            elif len(publisher) == 0:
+                publisher += (text + " ")
+            else:
+                other += text + " "  # Accumulate other text into a single string
+
+    return title, author, publisher, other
