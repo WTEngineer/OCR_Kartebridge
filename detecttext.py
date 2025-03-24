@@ -88,3 +88,42 @@ def categorize_by_box_size(text_blocks):
                 other += text + " "  # Accumulate other text into a single string
 
     return title, author, publisher, other
+def show_textregion(image, result):
+    combined_text = ""
+    text_blocks = []
+    
+    for i, (bbox, text, prob) in enumerate(result):
+        # Ensure the bounding box coordinates are in integer format
+        (top_left, top_right, bottom_right, bottom_left) = bbox
+        
+        # Convert the bounding box coordinates to integers
+        top_left = tuple(map(int, top_left))
+        bottom_right = tuple(map(int, bottom_right))
+
+        # Draw rectangle around the detected text region
+        cv2.rectangle(image, top_left, bottom_right, (0, 255, 0), 2)
+        
+        # Crop the image using array slicing (top-left to bottom-right)
+        cropped_image = image[top_left[1]:bottom_right[1], top_left[0]:bottom_right[0]]
+        
+        # Save the cropped image for debugging or further use
+        cropped_path = output_dir / f'cropped_{i}.jpg'
+        cv2.imwrite(str(cropped_path), cropped_image)
+        print(f"Cropped image saved to {cropped_path}")
+        
+        # Use MangaOCR to recognize text in the cropped image
+        mocrtext = mangarecog.recognize_text(cropped_path)
+        print(f"Recognized text (MangaOCR): {mocrtext}")
+        
+        # Accumulate the recognized text into the combined_text string
+        combined_text += mocrtext.strip() + " "  # Add space between each text block
+        
+        # Save the text block for categorization later
+        text_blocks.append((bbox, mocrtext, prob))
+        
+        # Display the recognized text on the image
+        image = display_japanese_text(image, mocrtext, top_left, font_path)
+        cv2.imshow("Text Detection", image)  # Display the image with text regions
+
+    # Filter out non-Japanese text blocks
+    text_blocks = remove_non_japanese(text_blocks)
