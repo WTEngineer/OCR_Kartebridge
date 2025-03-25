@@ -127,3 +127,13 @@ def show_textregion(image, result):
 
     # Filter out non-Japanese text blocks
     text_blocks = remove_non_japanese(text_blocks)
+    # Categorize the text blocks based on their box size
+    title, author, publisher, other = categorize_by_box_size(text_blocks)
+    print(f"Title: {title}")
+    print(f"Author: {author}")
+    print(f"Publisher: {publisher}")
+    print(f"Other: {other}")
+    
+    print(f"Combined Text: {combined_text}")
+    
+    return title, author, publisher, other, combined_text
