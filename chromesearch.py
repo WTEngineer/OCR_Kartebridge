@@ -21,3 +21,7 @@ def google_search(search_query):
     chrome_options.add_argument('--disable-dev-shm-usage')
     chrome_options.add_argument("--window-size=1280,768")
     driver = webdriver.Chrome(service=service, options=chrome_options)
+    driver.get("https://www.google.com")
+
+    # Locate the search box using its name attribute value
+    search_box = driver.find_element(By.NAME, "q")
