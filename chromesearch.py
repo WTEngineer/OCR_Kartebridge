@@ -25,3 +25,10 @@ def google_search(search_query):
 
     # Locate the search box using its name attribute value
     search_box = driver.find_element(By.NAME, "q")
+    search_box.clear()
+
+    # Type the search query
+    search_box.send_keys(search_query)
+
+    # Press Enter
+    search_box.send_keys(Keys.RETURN)
