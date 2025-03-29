@@ -58,6 +58,7 @@ def categorize_by_box_size(text_blocks):
     author = ""
     publisher = ""
     other = ""
+    
     # Calculate the average bounding box size
     avg_box_size = np.mean([((bbox[2][0] - bbox[0][0]) * (bbox[2][1] - bbox[0][1])) for (bbox, _, _) in text_blocks])
 
@@ -67,6 +68,7 @@ def categorize_by_box_size(text_blocks):
         width = bbox[2][0] - bbox[0][0]
         height = bbox[2][1] - bbox[0][1]
         area = width * height
+
         # Categorize based on box area size relative to the average box size
         if area > avg_box_size * 1.2:  # 1.5x the average area as a threshold for "larger" boxes
             # Assuming larger boxes are the title
@@ -88,6 +90,7 @@ def categorize_by_box_size(text_blocks):
                 other += text + " "  # Accumulate other text into a single string
 
     return title, author, publisher, other
+
 def show_textregion(image, result):
     combined_text = ""
     text_blocks = []
@@ -127,6 +130,7 @@ def show_textregion(image, result):
 
     # Filter out non-Japanese text blocks
     text_blocks = remove_non_japanese(text_blocks)
+    
     # Categorize the text blocks based on their box size
     title, author, publisher, other = categorize_by_box_size(text_blocks)
     print(f"Title: {title}")
