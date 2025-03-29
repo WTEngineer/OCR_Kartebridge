@@ -32,3 +32,8 @@ def google_search(search_query):
 
     # Press Enter
     search_box.send_keys(Keys.RETURN)
+    # Wait for a few seconds to see the results
+    time.sleep(5)
+
+    # Optionally, print the title of the page
+    print(driver.title)
