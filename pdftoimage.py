@@ -15,10 +15,4 @@ def pdf_to_image(pdf_path, output_format='PNG', dpi=200, output_prefix='output_p
         image.save(output_filename, output_format)
         print(f"Saved {output_filename}")
 
-# Example with poppler_path specified and output folder
-pdf_to_image(r'D:\MyTask\OCR\KarteBridge\Project\OCR_Kartebridge\input\IMG_20250228_0010.pdf', 
-             output_format='PNG', 
-             dpi=300, 
-             output_prefix='page', 
-             poppler_path=r'D:\MyTask\OCR\KarteBridge\resource\poppler-24.08.0\Library\bin',
-             output_folder='./output')
+
