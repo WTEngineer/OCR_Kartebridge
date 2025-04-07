@@ -37,12 +37,6 @@ def process_video():
             search_query = f"{title}"
             chromesearch.google_search(search_query)  # Search the text in Google
 
-        # Display the frame in a window
-        cv2.imshow("Video Frame", frame)
-
-        # Exit on pressing the 'q' key
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
 
     # Release the video capture object and close display windows
     cap.release()
