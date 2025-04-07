@@ -29,6 +29,8 @@ def google_search(search_query):
 
     search_box.clear()
 
+    # Type the search query
+    search_box.send_keys(search_query)
 
     # Press Enter
     search_box.send_keys(Keys.RETURN)
